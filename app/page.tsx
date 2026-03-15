@@ -1,12 +1,13 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import FeaturedGrid from "@/components/FeaturedGrid";
-import CustomCursor from "@/components/CustomCursor"; // Import here
-
+import CustomCursor from "@/components/CustomCursor";
 
 export default function Home() {
   return (
-    <main className="bg-black min-h-screen">
+    <main className="bg-black min-h-screen cursor-none">
+      <CustomCursor /> {/* The Magic Glow */}
+      
       <Navbar />
       <Hero />
       <FeaturedGrid/>

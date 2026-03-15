@@ -33,15 +33,14 @@ export const destinations: Destination[] = [
     name: "Petra",
     sub: "The Rose City",
     desc: "Carved directly into vibrant red sandstone cliffs. A lost civilization revealed in the desert sun.",
-    // NEW LINK (Verified)
-    img: "https://images.unsplash.com/photo-1599557053527-3b2d12c85f9e?q=80&w=3000&auto=format&fit=crop"
+    // NEW STABLE LINK
+    img: "https://images.unsplash.com/photo-1579606864654-e40a6538b936?q=80&w=3000&auto=format&fit=crop"
   },
   {
     id: "05",
     name: "Santorini",
     sub: "Aegean Dream",
     desc: "White cycladic architecture clinging to volcanic cliffs. Watch the world's most famous sunset turn the ocean gold.",
-    // NEW LINK (Verified)
     img: "https://images.unsplash.com/photo-1533105079780-92b9be482077?q=80&w=3000&auto=format&fit=crop"
   },
   {
