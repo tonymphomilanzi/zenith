@@ -126,10 +126,10 @@ const Footer = () => {
       {/* BOTTOM BAR */}
       <div className="flex justify-between items-end border-t border-white/10 pt-6 relative z-10">
         <div className="text-[10px] text-neutral-500 uppercase tracking-widest">
-          © {new Date().getFullYear()} Zenith Experience.
+          © {new Date().getFullYear()} Zenith | All rights reserved
         </div>
         <div className="text-[10px] text-neutral-500 uppercase tracking-widest hidden md:block">
-          Designed by You.
+          
         </div>
         <button 
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
