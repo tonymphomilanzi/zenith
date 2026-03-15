@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
-import { destinations } from '../data/destinations'; // Importing the data
+import { destinations } from '../data/destinations';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -19,17 +20,23 @@ const FeaturedGrid = () => {
       const text = section.querySelector('.gallery-text');
       const line = section.querySelector('.reveal-line');
 
-      // 1. Image Parallax
+      // 1. AUTO-COLOR + Parallax
+      // The image starts grayscale, and turns colorful when centered
       gsap.fromTo(img, 
-        { y: -50, scale: 1.1 },
+        { 
+          y: -50, 
+          scale: 1.1,
+          filter: "grayscale(100%) brightness(0.8)" // Start Dark & Gray
+        },
         { 
           y: 50,
           scale: 1,
+          filter: "grayscale(0%) brightness(1)", // End Colorful & Bright
           ease: "none",
           scrollTrigger: {
             trigger: section,
-            start: "top bottom",
-            end: "bottom top",
+            start: "top bottom", 
+            end: "center center", // Fully colorful when in center
             scrub: true
           }
         }
@@ -92,9 +99,15 @@ const FeaturedGrid = () => {
                 {/* Image */}
                 <div className="w-full md:w-[55%] h-[50vh] md:h-[70vh] overflow-hidden relative">
                   <div 
-                    className="gallery-img w-full h-[120%] bg-cover bg-center absolute top-[-10%] filter grayscale group-hover:grayscale-0 transition-all duration-1000 ease-in-out"
+                    className="gallery-img w-full h-[120%] bg-cover bg-center absolute top-[-10%]"
                     style={{ backgroundImage: `url(${dest.img})` }}
                   />
+                  
+                  {/* NEW DESIGN TOUCH: Coordinates Badge */}
+                  <div className="absolute bottom-6 right-6 bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 flex flex-col items-end">
+                    <span className="text-[10px] text-neutral-400 tracking-widest uppercase">Coordinates</span>
+                    <span className="text-xs font-mono text-white">{dest.lat} / {dest.long}</span>
+                  </div>
                 </div>
 
                 {/* Text */}
