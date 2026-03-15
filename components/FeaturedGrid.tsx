@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import React, { useRef } from 'react';
@@ -11,8 +10,29 @@ gsap.registerPlugin(ScrollTrigger);
 
 const FeaturedGrid = () => {
   const container = useRef(null);
+  const headerRef = useRef(null); // Ref for the title
 
   useGSAP(() => {
+    
+    // --- 1. TITLE REVEAL ANIMATION ---
+    // The words start pushed down (y: 100%) inside an overflow-hidden box.
+    // They slide up to y: 0%
+    const titleWords = gsap.utils.toArray('.title-word');
+    gsap.fromTo(titleWords, 
+      { y: "100%" },
+      { 
+        y: "0%",
+        duration: 1.5,
+        stagger: 0.15, // "Journeys" comes up slightly after "Selected"
+        ease: "power4.out",
+        scrollTrigger: {
+          trigger: headerRef.current,
+          start: "top 80%", // Starts when header enters viewport
+        }
+      }
+    );
+
+    // --- 2. GRID ITEMS ANIMATION ---
     const sections = gsap.utils.toArray('.gallery-item');
 
     sections.forEach((section: any) => {
@@ -20,29 +40,28 @@ const FeaturedGrid = () => {
       const text = section.querySelector('.gallery-text');
       const line = section.querySelector('.reveal-line');
 
-      // 1. AUTO-COLOR + Parallax
-      // The image starts grayscale, and turns colorful when centered
+      // Auto-Color + Parallax
       gsap.fromTo(img, 
         { 
           y: -50, 
           scale: 1.1,
-          filter: "grayscale(100%) brightness(0.8)" // Start Dark & Gray
+          filter: "grayscale(100%) brightness(0.8)"
         },
         { 
           y: 50,
           scale: 1,
-          filter: "grayscale(0%) brightness(1)", // End Colorful & Bright
+          filter: "grayscale(0%) brightness(1)",
           ease: "none",
           scrollTrigger: {
             trigger: section,
             start: "top bottom", 
-            end: "center center", // Fully colorful when in center
+            end: "center center",
             scrub: true
           }
         }
       );
 
-      // 2. Text Stagger
+      // Text Stagger
       gsap.from(text.children, {
         y: 50,
         opacity: 0,
@@ -56,7 +75,7 @@ const FeaturedGrid = () => {
         }
       });
 
-      // 3. Line Draw
+      // Line Draw
       gsap.fromTo(line, 
         { width: "0%" },
         { 
@@ -82,12 +101,24 @@ const FeaturedGrid = () => {
       </div>
 
       <div className="relative z-10">
-        <div className="px-6 md:px-12 mb-32">
-          <h2 className="text-4xl md:text-8xl font-serif tracking-tighter">
-            Selected <span className="text-neutral-600 italic">Journeys</span>
+        
+        {/* --- ANIMATED HEADER --- */}
+        <div ref={headerRef} className="px-6 md:px-12 mb-32">
+          <h2 className="text-4xl md:text-8xl font-serif tracking-tighter leading-none">
+            {/* Wrapper 1 */}
+            <div className="overflow-hidden inline-block align-bottom">
+              <span className="title-word block">Selected</span>
+            </div>
+            {/* Spacer */}
+            <span className="inline-block w-4 md:w-8"></span>
+            {/* Wrapper 2 */}
+            <div className="overflow-hidden inline-block align-bottom">
+              <span className="title-word block text-neutral-600 italic">Journeys</span>
+            </div>
           </h2>
         </div>
 
+        {/* --- GRID LIST --- */}
         <div className="flex flex-col gap-32 px-4 md:px-12">
           {destinations.map((dest, i) => (
             <div key={dest.id} className="gallery-item group relative">
@@ -103,7 +134,7 @@ const FeaturedGrid = () => {
                     style={{ backgroundImage: `url(${dest.img})` }}
                   />
                   
-                  {/* NEW DESIGN TOUCH: Coordinates Badge */}
+                  {/* Coordinates Badge */}
                   <div className="absolute bottom-6 right-6 bg-black/50 backdrop-blur-md px-4 py-2 border border-white/10 flex flex-col items-end">
                     <span className="text-[10px] text-neutral-400 tracking-widest uppercase">Coordinates</span>
                     <span className="text-xs font-mono text-white">{dest.lat} / {dest.long}</span>

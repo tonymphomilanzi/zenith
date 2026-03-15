@@ -38,13 +38,13 @@ export const destinations: Destination[] = [
   },
   {
     id: "04",
-    name: "Amalfi",
-    sub: "Vertical Paradise",
-    desc: "Pastel houses tumbling down to the Tyrrhenian Sea. The scent of lemons, salt, and the eternal Dolce Vita.",
-    // STABLE POSITANO LINK
-    img: "https://images.unsplash.com/photo-1533904353181-25cbc70d03ae?q=80&w=2952&auto=format&fit=crop",
-    lat: "40.6281° N",
-    long: "14.4850° E"
+    name: "Cinque Terre",
+    sub: "Italian Riviera",
+    desc: "Colorful villages clinging to rugged cliffs. A masterpiece of human resilience and Mediterranean beauty.",
+    // NEW STABLE LINK
+    img: "https://images.unsplash.com/photo-1516483638261-f4dbaf036963?q=80&w=3000&auto=format&fit=crop",
+    lat: "44.1461° N",
+    long: "9.6439° E"
   },
   {
     id: "05",
