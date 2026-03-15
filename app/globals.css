@@ -23,3 +23,13 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Add this to the bottom of app/globals.css */
+
+.video-text {
+  /* This puts the video INSIDE the letters */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  background-image: url("https://cdn.coverr.co/videos/coverr-waves-in-the-ocean-4626/1080p.mp4"); /* Fallback */
+}

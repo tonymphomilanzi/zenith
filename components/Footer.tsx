@@ -3,112 +3,140 @@
 import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import { ArrowUpRight } from 'lucide-react';
 
 const Footer = () => {
   const container = useRef(null);
-  const titleRef = useRef(null);
+  const textRef = useRef(null);
+  const videoRef = useRef(null);
 
   useGSAP(() => {
-    // Parallax the Big Text
-    gsap.fromTo(titleRef.current, 
-      { y: -50 },
-      { 
-        y: 0,
-        scrollTrigger: {
-          trigger: container.current,
-          start: "top bottom",
-          end: "bottom bottom",
-          scrub: true
-        }
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: container.current,
+        start: "top bottom", // When top of footer hits bottom of viewport
+        end: "bottom bottom",
+        scrub: true,
       }
+    });
+
+    // 1. Text Parallax (Moves slightly slower than scroll)
+    tl.fromTo(textRef.current, 
+      { y: -100 },
+      { y: 0, ease: "none" }
     );
+
+    // 2. Video Text Scaling (The text gets bigger)
+    tl.fromTo(videoRef.current,
+      { scale: 0.8, opacity: 0.5 },
+      { scale: 1, opacity: 1, ease: "none" },
+      "<" // Start at same time
+    );
+
   }, { scope: container });
 
   return (
-    <footer ref={container} className="relative bg-black text-white pt-20 pb-10 px-6 md:px-12 border-t border-white/10 overflow-hidden">
+    <footer 
+      ref={container} 
+      className="relative h-screen w-full bg-[#050505] text-white flex flex-col justify-between px-6 md:px-12 py-12 overflow-hidden"
+      style={{ zIndex: 0 }} // Sits behind main content
+    >
       
-      <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-0 mb-32 relative z-10">
+      {/* Background Video Texture (Optional ambient background) */}
+      <div className="absolute inset-0 opacity-10 pointer-events-none">
+         <video 
+            autoPlay 
+            loop 
+            muted 
+            playsInline 
+            className="w-full h-full object-cover"
+         >
+            <source src="https://cdn.coverr.co/videos/coverr-foggy-forest-1606/1080p.mp4" type="video/mp4" />
+         </video>
+      </div>
+
+      {/* TOP SECTION: Links & Input */}
+      <div className="flex flex-col md:flex-row justify-between w-full relative z-10 pt-20">
         
-        {/* Left: Call to Action */}
-        <div className="space-y-8 max-w-lg">
-          <h3 className="text-3xl md:text-4xl font-serif leading-tight">
-            Ready to vanish into the <br /> 
-            <span className="italic text-neutral-500">unknown?</span>
+        {/* Newsletter */}
+        <div className="w-full md:w-1/3 mb-12 md:mb-0">
+          <h3 className="text-sm tracking-[0.2em] uppercase text-neutral-400 mb-8">
+            Stay in the loop
           </h3>
-          
-          <div className="flex flex-col gap-2">
-            <label className="text-xs tracking-[0.2em] text-neutral-400 uppercase">Newsletter</label>
-            <div className="flex border-b border-white/30 pb-2">
-              <input 
-                type="email" 
-                placeholder="Enter your email" 
-                className="bg-transparent outline-none w-full placeholder:text-neutral-700"
-              />
-              <button className="text-xs uppercase tracking-widest hover:text-neutral-400 transition-colors">
-                Join
-              </button>
-            </div>
+          <div className="relative group">
+            <input 
+              type="email" 
+              placeholder="Email Address" 
+              className="w-full bg-transparent border-b border-white/20 py-4 text-2xl font-serif outline-none placeholder:text-neutral-700 group-hover:border-white transition-colors duration-500"
+            />
+            <button className="absolute right-0 top-4 text-neutral-500 group-hover:text-white transition-colors duration-300">
+              <ArrowUpRight className="w-6 h-6" />
+            </button>
           </div>
         </div>
 
-        {/* Right: Navigation & Socials */}
-        <div className="flex gap-12 md:gap-24">
+        {/* Links Grid */}
+        <div className="flex gap-12 md:gap-32">
           <div className="flex flex-col gap-4">
-            <h4 className="text-xs tracking-[0.2em] text-neutral-500 uppercase mb-2">Sitemap</h4>
-            {["Destinations", "Journal", "About", "Concierge"].map((item) => (
-              <a key={item} href="#" className="hover:text-neutral-400 transition-colors font-serif text-lg">
+            <h4 className="text-xs tracking-[0.2em] text-neutral-500 uppercase mb-4">Sitemap</h4>
+            {["Destinations", "Concierge", "Journal", "About"].map((item) => (
+              <a key={item} href="#" className="text-lg font-serif text-white/60 hover:text-white transition-colors duration-300">
                 {item}
               </a>
             ))}
           </div>
-
           <div className="flex flex-col gap-4">
-            <h4 className="text-xs tracking-[0.2em] text-neutral-500 uppercase mb-2">Socials</h4>
-            <div className="flex gap-4">
-              
-              {/* Instagram SVG */}
-              <a href="#" className="hover:scale-125 transition-transform duration-300">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                </svg>
+            <h4 className="text-xs tracking-[0.2em] text-neutral-500 uppercase mb-4">Socials</h4>
+            {["Instagram", "Twitter", "LinkedIn"].map((item) => (
+              <a key={item} href="#" className="text-lg font-serif text-white/60 hover:text-white transition-colors duration-300">
+                {item}
               </a>
-
-              {/* Twitter/X SVG */}
-              <a href="#" className="hover:scale-125 transition-transform duration-300">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
-                  <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
-                </svg>
-              </a>
-
-              {/* LinkedIn SVG */}
-              <a href="#" className="hover:scale-125 transition-transform duration-300">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path>
-                  <rect x="2" y="9" width="4" height="12"></rect>
-                  <circle cx="4" cy="4" r="2"></circle>
-                </svg>
-              </a>
-
-            </div>
+            ))}
           </div>
         </div>
       </div>
 
-      {/* BOTTOM: MASSIVE WATERMARK */}
-      <div className="relative border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-end">
-        <div className="text-[10px] text-neutral-500 uppercase tracking-widest mb-4 md:mb-0">
-          © {new Date().getFullYear()} Zenith Travel. All Rights Reserved.
+      {/* CENTER: THE VIDEO TEXT SHOWDOWN */}
+      <div className="flex-grow flex items-center justify-center relative z-10 my-10">
+        <div ref={videoRef} className="relative w-full text-center">
+            {/* 
+               This text uses the CSS class .video-text 
+               We actually put the video BEHIND the text using mix-blend-mode for better browser support
+            */}
+            <h1 className="text-[15vw] md:text-[20vw] font-black leading-none tracking-tighter mix-blend-overlay opacity-80 select-none">
+              ZENITH
+            </h1>
+            
+            {/* The Video that plays "inside" the text via mix-blend-multiply logic */}
+            <div className="absolute inset-0 flex items-center justify-center -z-10 opacity-60">
+                <video 
+                    autoPlay 
+                    loop 
+                    muted 
+                    playsInline
+                    className="w-full max-h-[30vh] object-cover mix-blend-screen"
+                >
+                     {/* Ocean Waves Video */}
+                    <source src="https://cdn.coverr.co/videos/coverr-waves-in-the-ocean-4626/1080p.mp4" type="video/mp4" />
+                </video>
+            </div>
         </div>
-        
-        <h1 
-          ref={titleRef} 
-          className="text-[18vw] leading-[0.75] font-serif font-bold text-neutral-900 select-none pointer-events-none mix-blend-difference"
+      </div>
+
+      {/* BOTTOM BAR */}
+      <div className="flex justify-between items-end border-t border-white/10 pt-6 relative z-10">
+        <div className="text-[10px] text-neutral-500 uppercase tracking-widest">
+          © {new Date().getFullYear()} Zenith Experience.
+        </div>
+        <div className="text-[10px] text-neutral-500 uppercase tracking-widest hidden md:block">
+          Designed by You.
+        </div>
+        <button 
+            onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+            className="text-xs text-white uppercase tracking-widest hover:text-neutral-400 transition-colors"
         >
-          ZENITH
-        </h1>
+          Back to Top
+        </button>
       </div>
 
     </footer>
