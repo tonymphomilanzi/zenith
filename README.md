@@ -66,3 +66,17 @@ The current version represents the **Frontend MVP**. The following features are 
 1. **Clone the repository:**
    ```bash
    git clone https://github.com/yourusername/zenith-travel.git
+
+   
+2. **Install dependencies:**
+    ```bash
+   npm install
+# or
+   yarn install
+
+3. **Run the development server:**
+    ```bash
+    npm run dev
+
+4. **Open http://localhost:3000 with your browser.**
+
