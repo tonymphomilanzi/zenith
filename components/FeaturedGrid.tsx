@@ -112,7 +112,7 @@ const FeaturedGrid = () => {
             {/* Spacer */}
             <span className="inline-block w-4 md:w-8"></span>
             {/* Wrapper 2 */}
-            <div className="overflow-hidden inline-block align-bottom pb-4">
+            <div className="overflow-hidden inline-block align-bottom pb-4 pr-4">
               <span className="title-word block text-neutral-600 italic">Journeys</span>
             </div>
           </h2>
