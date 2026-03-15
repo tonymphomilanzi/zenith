@@ -4,7 +4,7 @@ export interface Destination {
   sub: string;
   desc: string;
   img: string;
-  lat: string; // Added coordinates for extra design touch
+  lat: string;
   long: string;
 }
 
@@ -38,13 +38,13 @@ export const destinations: Destination[] = [
   },
   {
     id: "04",
-    name: "Petra",
-    sub: "The Rose City",
-    desc: "Carved directly into vibrant red sandstone cliffs. A lost civilization revealed in the desert sun.",
-    // NEW RELIABLE LINK
-    img: "https://images.unsplash.com/photo-1599557053527-3b2d12c85f9e?q=80&w=3000&auto=format&fit=crop",
-    lat: "30.3285° N",
-    long: "35.4444° E"
+    name: "Amalfi",
+    sub: "Vertical Paradise",
+    desc: "Pastel houses tumbling down to the Tyrrhenian Sea. The scent of lemons, salt, and the eternal Dolce Vita.",
+    // STABLE POSITANO LINK
+    img: "https://images.unsplash.com/photo-1533904353181-25cbc70d03ae?q=80&w=2952&auto=format&fit=crop",
+    lat: "40.6281° N",
+    long: "14.4850° E"
   },
   {
     id: "05",
