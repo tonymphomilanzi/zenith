@@ -72,8 +72,7 @@ const Footer = () => {
                     playsInline
                     className="w-full h-full object-cover"
                 >
-                    {/* Using a reliable abstract liquid video */}
-                    <source src="https://videos.pexels.com/video-files/2660169/2660169-hd_1920_1080_30fps.mp4" type="video/mp4" />
+                      <source src="https://cdn.coverr.co/videos/coverr-flowing-water-1662/1080p.mp4" type="video/mp4" />
                 </video>
             </div>
 
