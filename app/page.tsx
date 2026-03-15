@@ -2,6 +2,7 @@ import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import FeaturedGrid from "@/components/FeaturedGrid";
 import CustomCursor from "@/components/CustomCursor";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -13,9 +14,7 @@ export default function Home() {
       <FeaturedGrid/>
 
       
-      <footer className="h-[20vh] flex items-center justify-center border-t border-neutral-800 text-neutral-600 text-xs tracking-widest">
-        ZENIH 
-      </footer>
+      <Footer />
     </main>
   );
 }
