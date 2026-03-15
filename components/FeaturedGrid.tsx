@@ -4,60 +4,9 @@ import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { useGSAP } from '@gsap/react';
+import { destinations } from '../data/destinations'; // Importing the data
 
 gsap.registerPlugin(ScrollTrigger);
-
-const destinations = [
-  {
-    id: "01",
-    name: "Kyoto",
-    sub: "The Ancient Capital",
-    desc: "Immerse yourself in the quiet power of tradition. Where shadows play on bamboo paths and time stands still.",
-    img: "https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?q=80&w=3270&auto=format&fit=crop"
-  },
-  {
-    id: "02",
-    name: "Iceland",
-    sub: "Fire & Ice",
-    desc: "A landscape forged by the gods. Witness the raw, unfiltered beauty of nature at the edge of the world.",
-    img: "https://images.unsplash.com/photo-1476610182048-b716b8518aae?q=80&w=3259&auto=format&fit=crop"
-  },
-  {
-    id: "03",
-    name: "Tulum",
-    sub: "Mayan Coast",
-    desc: "Where the jungle meets the jade sea. A sanctuary for the soul, hidden away from the noise of modern life.",
-    img: "https://images.unsplash.com/photo-1504541989296-167df755af3f?q=80&w=3000&auto=format&fit=crop"
-  },
-  {
-    id: "04",
-    name: "Amangiri",
-    sub: "Utah Desert",
-    desc: "Minimalist architecture disappears into the canyon rock. A study in silence, space, and the American Southwest.",
-    img: "https://images.unsplash.com/photo-1549488347-19416599b5a3?q=80&w=3000&auto=format&fit=crop"
-  },
-  {
-    id: "05",
-    name: "Dolomites",
-    sub: "Italian Alps",
-    desc: "Jagged peaks piercing the sky. The air is crisp, the lakes are emerald, and the journey is vertical.",
-    img: "https://images.unsplash.com/photo-1516091873322-9590461bf9a3?q=80&w=3000&auto=format&fit=crop"
-  },
-  {
-    id: "06",
-    name: "Marrakech",
-    sub: "Red City",
-    desc: "A sensory explosion of spice, color, and texture. Lose yourself in the labyrinth of the Medina.",
-    img: "https://images.unsplash.com/photo-1597212618440-806262de4f6b?q=80&w=3353&auto=format&fit=crop"
-  },
-  {
-    id: "07",
-    name: "Maldives",
-    sub: "Indian Ocean",
-    desc: "Water so clear it looks like glass. The ultimate disconnect from reality, suspended over the blue abyss.",
-    img: "https://images.unsplash.com/photo-1514282401047-d79a71a590e8?q=80&w=3265&auto=format&fit=crop"
-  }
-];
 
 const FeaturedGrid = () => {
   const container = useRef(null);
@@ -70,7 +19,7 @@ const FeaturedGrid = () => {
       const text = section.querySelector('.gallery-text');
       const line = section.querySelector('.reveal-line');
 
-      // 1. Image Parallax (Standard)
+      // 1. Image Parallax
       gsap.fromTo(img, 
         { y: -50, scale: 1.1 },
         { 
@@ -86,12 +35,12 @@ const FeaturedGrid = () => {
         }
       );
 
-      // 2. Text Stagger Reveal
+      // 2. Text Stagger
       gsap.from(text.children, {
         y: 50,
         opacity: 0,
         duration: 1,
-        stagger: 0.1, // Lines of text appear one by one
+        stagger: 0.1,
         ease: "power3.out",
         scrollTrigger: {
           trigger: section,
@@ -100,7 +49,7 @@ const FeaturedGrid = () => {
         }
       });
 
-      // 3. The "Curtain" Line Draw
+      // 3. Line Draw
       gsap.fromTo(line, 
         { width: "0%" },
         { 
@@ -120,30 +69,27 @@ const FeaturedGrid = () => {
   return (
     <section ref={container} className="relative bg-black text-white py-20 overflow-hidden">
       
-      {/* FILM GRAIN OVERLAY: Adds texture to the whole section */}
+      {/* Noise Texture */}
       <div className="absolute inset-0 z-0 opacity-20 pointer-events-none mix-blend-overlay" 
            style={{ backgroundImage: 'url("https://grainy-gradients.vercel.app/noise.svg")' }}>
       </div>
 
       <div className="relative z-10">
-        {/* Header */}
         <div className="px-6 md:px-12 mb-32">
           <h2 className="text-4xl md:text-8xl font-serif tracking-tighter">
             Selected <span className="text-neutral-600 italic">Journeys</span>
           </h2>
         </div>
 
-        {/* The List */}
         <div className="flex flex-col gap-32 px-4 md:px-12">
           {destinations.map((dest, i) => (
             <div key={dest.id} className="gallery-item group relative">
               
-              {/* THE REVEAL LINE */}
               <div className="reveal-line h-[1px] bg-white/30 mb-12"></div>
 
               <div className={`flex flex-col ${i % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-10 md:gap-20 items-center`}>
                 
-                {/* Image Area */}
+                {/* Image */}
                 <div className="w-full md:w-[55%] h-[50vh] md:h-[70vh] overflow-hidden relative">
                   <div 
                     className="gallery-img w-full h-[120%] bg-cover bg-center absolute top-[-10%] filter grayscale group-hover:grayscale-0 transition-all duration-1000 ease-in-out"
@@ -151,7 +97,7 @@ const FeaturedGrid = () => {
                   />
                 </div>
 
-                {/* Text Area */}
+                {/* Text */}
                 <div className="gallery-text w-full md:w-[35%] space-y-6">
                   <div className="flex items-center gap-4">
                     <span className="text-sm font-bold border border-white/20 rounded-full px-3 py-1 text-white/60">
