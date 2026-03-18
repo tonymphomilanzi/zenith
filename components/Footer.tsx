@@ -11,7 +11,7 @@ const Footer = () => {
         
         {/* Left: Newsletter */}
         <div className="w-full md:w-1/3">
-          <h3 className="text-3xl md:text-5xl font-serif leading-tight mb-8">
+          <h3 className="text-3xl md:text-5xl font-serif leading-tight">
             Ready to <span className="italic text-neutral-500">vanish?</span>into the unknown.
           </h3>
           
