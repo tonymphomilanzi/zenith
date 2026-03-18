@@ -12,7 +12,7 @@ const Footer = () => {
         {/* Left: Newsletter */}
         <div className="w-full md:w-1/3">
           <h3 className="text-3xl md:text-5xl font-serif leading-tight mb-8">
-            Ready to <span className="italic text-neutral-500">vanish?</span>
+            Ready to <span className="italic text-neutral-500">vanish?</span>into the unknown.
           </h3>
           
           <div className="relative group max-w-sm">
@@ -52,7 +52,7 @@ const Footer = () => {
                3. The video sits BEHIND it.
             */}
             <h1 
-                className="text-[22vw] font-serif font-black leading-none tracking-tighter text-transparent select-none"
+                className="text-[22vw] mt-10 font-serif font-black leading-none tracking-tighter text-transparent select-none"
                 style={{ WebkitTextStroke: '2px rgba(255,255,255,0.5)' }}
             >
               ZENITH
