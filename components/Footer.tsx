@@ -65,15 +65,7 @@ const Footer = () => {
             </div>
             
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full -z-20 opacity-40 mix-blend-screen">
-                <video 
-                    autoPlay 
-                    loop 
-                    muted 
-                    playsInline
-                    className="w-full h-full object-cover"
-                >
-                      <source src="https://cdn.coverr.co/videos/coverr-flowing-water-1662/1080p.mp4" type="video/mp4" />
-                </video>
+            {/* The actual video element */}
             </div>
 
         </div>
